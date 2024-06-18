@@ -1,6 +1,10 @@
 import { S3Client } from '@aws-sdk/client-s3';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 
 // Create an S3 client using AWS SDK v3
 const s3Client = new S3Client({
