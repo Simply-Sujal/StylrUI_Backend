@@ -11,7 +11,7 @@ const app = express();
 // handling cors policy issue
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://stylrui.netlify.app/",
+    "https://66733d767ffbc490cfe237db--comfy-frangollo-d55e86.netlify.app",
     "http://stylrui-frontend-deployment.s3-website.ap-south-1.amazonaws.com"
 ];
 
