@@ -2,19 +2,33 @@ import express from "express";
 import cors from "cors";
 import startServer from "./connection.js";
 import user from "./routes/user/user_routes.routes.js";
-import code from "./routes/code/code_contributing.routes.js"
-import block from "./routes/block/block_contributing.routes.js"
+import code from "./routes/code/code_contributing.routes.js";
+import block from "./routes/block/block_contributing.routes.js";
 import admin from "./routes/admin/admin.routes.js";
 
 const app = express();
 
 // handling cors policy issue
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://6672619d3bf94cadf74aca49--kaleidoscopic-kitten-a674e6.netlify.app",
+    "http://stylrui-frontend-deployment.s3-website.ap-south-1.amazonaws.com/"
+];
+
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: 'GET,PUT,POST,DELETE,PATCH,HEAD',
     credentials: true
-}
+};
+
 app.use(cors(corsOptions));
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,15 +39,15 @@ app.get("/", (req, res) => {
 });
 
 // all routes
-app.use("/api/v1/user/", user)
+app.use("/api/v1/user/", user);
 
-// here user can submit their code for review 
-app.use("/api/v1/code/", code)
+// here user can submit their code for review
+app.use("/api/v1/code/", code);
 
-// here user can submit their code for review 
-app.use("/api/v1/block/", block)
+// here user can submit their code for review
+app.use("/api/v1/block/", block);
 
-// admin route 
+// admin route
 app.use("/api/v1/admin", admin);
 
 // this will run the server as well as db
