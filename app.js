@@ -11,7 +11,7 @@ const app = express();
 // handling cors policy issue
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://stylrui.in/",
+    "https://stylrui.in",
 ];
 
 const corsOptions = {
